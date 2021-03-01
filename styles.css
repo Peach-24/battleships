@@ -1,13 +1,59 @@
-.grid-user {
-  width: 440px;
-  height: 440px;
+body {
+  height: 100vh;
+  text-align: center;
+  background-color: navy;
+}
+
+main {
+  position: relative;
+  height: 100%;
+}
+
+p {
+  color: yellow;
+}
+
+.board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
   display: flex;
   flex-wrap: wrap;
-  background-color: blue;
+  background-color: navy;
+  justify-content: center;
+  align-self: center;
+  align-content: center;
 }
 
 .grid div {
   width: 40px;
   height: 40px;
-  border: 1px solid red;
+  border: 1px solid rgba(255, 255, 255, 0.582);
+}
+
+.selected {
+  background-color: tomato;
+}
+
+#row-col {
+  border: 1px solid navy;
+}
+
+.controls {
+  padding: 1rem;
+}
+
+#missile-input {
+  background-color: rgba(255, 255, 255, 0.295);
+  width: 200px;
+  margin: auto;
+  padding: 1rem;
+}
+
+#start {
+  margin: 1rem;
 }
