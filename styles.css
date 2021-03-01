@@ -38,6 +38,9 @@ p {
 .selected {
   background-color: tomato;
 }
+.hit {
+  background-color: rgb(86, 255, 71);
+}
 
 #row-col {
   border: 1px solid navy;
