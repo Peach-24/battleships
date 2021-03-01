@@ -2,6 +2,7 @@ body {
   height: 100vh;
   text-align: center;
   background-color: navy;
+  font-family: monospace;
 }
 
 main {
@@ -11,6 +12,11 @@ main {
 
 p {
   color: yellow;
+}
+
+h3 {
+  color: rgb(173, 253, 13);
+  size: 18px;
 }
 
 .board {
@@ -47,16 +53,31 @@ p {
 }
 
 .controls {
-  padding: 1rem;
+  padding: 0rem;
 }
 
 #missile-input {
   background-color: rgba(255, 255, 255, 0.295);
   width: 200px;
   margin: auto;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 #start {
   margin: 1rem;
+}
+
+#feedback {
+  color: yellow;
+  font-size: 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  line-height: 5px;
+}
+
+li p {
+  font-size: 14px;
 }

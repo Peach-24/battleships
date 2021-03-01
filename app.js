@@ -36,11 +36,15 @@ const makeSelection = () => {
   const square = document.getElementById(input);
 
   if (destroyer1.includes(input)) {
-    console.log("HIT!");
+    console.log();
     square.classList.add("hit");
+    let feedback = document.getElementById("feedback");
+    feedback.innerText = "HIT!";
   } else {
     console.log("MISS!");
     square.classList.add("selected");
+    let feedback = document.getElementById("feedback");
+    feedback.innerText = "MISS!";
   }
 };
 
