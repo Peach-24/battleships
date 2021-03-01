@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="app.js" charset="utf-8"></script>
 
     <title>Battleships</title>
   </head>
   <body>
     <main>
       <div class="grid board">
+        <div id="row-col"><p></p></div>
+        <div id="row-col"><p>A</p></div>
+        <div id="row-col"><p>B</p></div>
+        <div id="row-col"><p>C</p></div>
+        <div id="row-col"><p>D</p></div>
+        <div id="row-col"><p>E</p></div>
+        <div id="row-col"><p>F</p></div>
+        <div id="row-col"><p>G</p></div>
+        <div id="row-col"><p>H</p></div>
+        <div id="row-col"><p>I</p></div>
+        <div id="row-col"><p>J</p></div>
         <div id="row-col"><p>0</p></div>
         <div id="A0"></div>
         <div id="B0"></div>
@@ -122,24 +132,13 @@
         <div id="H9"></div>
         <div id="I9"></div>
         <div id="J9"></div>
-        <div id="row-col"><p></p></div>
-        <div id="row-col"><p>A</p></div>
-        <div id="row-col"><p>B</p></div>
-        <div id="row-col"><p>C</p></div>
-        <div id="row-col"><p>D</p></div>
-        <div id="row-col"><p>E</p></div>
-        <div id="row-col"><p>F</p></div>
-        <div id="row-col"><p>G</p></div>
-        <div id="row-col"><p>H</p></div>
-        <div id="row-col"><p>I</p></div>
-        <div id="row-col"><p>J</p></div>
       </div>
       <div class="controls">
         <h3>Enemy ships:</h3>
         <ul>
-          <li><p>Battleship (5 squares)</p></li>
-          <li><p>Destroyer (4 squares)</p></li>
-          <li><p>Destroyer (4 squares)</p></li>
+          <li><p id="battleship">Battleship (5 squares)</p></li>
+          <li><p id="destroyer-1">Destroyer (4 squares)</p></li>
+          <li><p id="destoryer-2">Destroyer (4 squares)</p></li>
         </ul>
       </div>
       <div id="missile-input">
@@ -148,5 +147,6 @@
         <p id="feedback"></p>
       </div>
     </main>
+    <script src="app.js" charset="utf-8"></script>
   </body>
 </html>

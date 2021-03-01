@@ -28,36 +28,35 @@ const direction = {
 };
 
 let occupiedSquares = [];
+let shipsNestedArr = [];
 let battleship = [];
 let destroyer1 = [];
 let destroyer2 = [];
+let successfulHits = [];
 
 const makeSelection = () => {
   const input = document.getElementById("coordinates").value.toUpperCase();
   const square = document.getElementById(input);
 
-  if (
-    destroyer1.includes(input) ||
-    destroyer2.includes(input) ||
-    battleship.includes(input)
-  ) {
-    console.log();
-    square.classList.add("hit");
+  const battle = document.getElementById("battleship");
+  const dest1 = document.getElementById("destroyer-1");
+  const dest2 = document.getElementById("destroyer-2");
+
+  if (occupiedSquares.includes(input)) {
+    // square.classList.add("hit");
     let feedback = document.getElementById("feedback");
+    successfulHits.push(input);
+
+    // check if a full boat has been sunk,
+    // if it has NOT, set feedback text to HIT
     feedback.innerText = "HIT!";
+    // if it HAS, set feedback text to SUNK
+    // also add "sunk" class (strikethrough) to appropriate ship
   } else {
-    console.log("MISS!");
-    square.classList.add("selected");
     let feedback = document.getElementById("feedback");
+    square.classList.add("selected");
     feedback.innerText = "MISS!";
   }
-};
-
-const highlightShips = () => {
-  occupiedSquares.map((square) => {
-    let x = document.getElementById(square);
-    x.classList.add("ship");
-  });
 };
 
 function getRandomNum() {
@@ -78,10 +77,6 @@ const setShipLocation = (length) => {
   const x = shipHead.slice(0, 1);
   const y = shipHead.slice(1, 2);
   let direction = getRandomDir();
-
-  //   console.log("Ship head square: ", shipHead);
-  //   console.log("Direction:", direction);
-  //   console.log("X:", x, "Y:", y);
 
   if (direction === "up") {
     if (y >= length) {
@@ -139,26 +134,42 @@ const setShipLocation = (length) => {
     }
   }
 
-  console.log("Occupied squares: ", occupiedSquares);
-  //   console.log("this ship's squares: ", shipSquares);
-
   if (shipSquares.some((square) => occupiedSquares.includes(square))) {
-    console.log("A square is doubled");
     return undefined;
   } else {
     shipSquares.forEach((location) => occupiedSquares.push(location));
-    console.log("All good");
+    shipsNestedArr.push(shipSquares);
     return shipSquares;
   }
 };
 
-window.onload = () => {
-  console.log("page is fully loaded");
+const highlightShips = () => {
+  occupiedSquares.map((square) => {
+    let x = document.getElementById(square);
+    x.classList.add("ship");
+  });
+};
+
+const initGame = () => {
   battleship = setShipLocation(5);
+
   destroyer1 = setShipLocation(4);
+  if (destroyer1 === undefined) {
+    destroyer1 = setShipLocation(4);
+  }
   destroyer2 = setShipLocation(4);
-  console.log("battleship: ", battleship);
-  console.log("destroyer1: ", destroyer1);
-  console.log("destroyer2: ", destroyer2);
+  if (destroyer2 === undefined) {
+    destroyer2 = setShipLocation(4);
+  }
+
+  if (destroyer1 === undefined || destroyer2 === undefined) {
+    window.location.reload();
+  }
+};
+
+window.onload = () => {
+  console.log("Page is fully loaded.");
+  initGame();
+  console.log("Ship locations:", shipsNestedArr);
   highlightShips(occupiedSquares);
 };
