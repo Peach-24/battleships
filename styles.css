@@ -48,8 +48,16 @@ h3 {
   background-color: rgb(86, 255, 71);
 }
 
+.ship {
+  background-color: lightblue;
+}
+
 #row-col {
   border: 1px solid navy;
+}
+#row-col p {
+  margin: 8px;
+  font-size: 18px;
 }
 
 .controls {

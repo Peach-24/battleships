@@ -27,6 +27,7 @@ const direction = {
   3: "left",
 };
 
+let occupiedSquares = [];
 let battleship = [];
 let destroyer1 = [];
 let destroyer2 = [];
@@ -35,7 +36,11 @@ const makeSelection = () => {
   const input = document.getElementById("coordinates").value.toUpperCase();
   const square = document.getElementById(input);
 
-  if (destroyer1.includes(input)) {
+  if (
+    destroyer1.includes(input) ||
+    destroyer2.includes(input) ||
+    battleship.includes(input)
+  ) {
     console.log();
     square.classList.add("hit");
     let feedback = document.getElementById("feedback");
@@ -46,6 +51,13 @@ const makeSelection = () => {
     let feedback = document.getElementById("feedback");
     feedback.innerText = "MISS!";
   }
+};
+
+const highlightShips = () => {
+  occupiedSquares.map((square) => {
+    let x = document.getElementById(square);
+    x.classList.add("ship");
+  });
 };
 
 function getRandomNum() {
@@ -60,8 +72,8 @@ function getRandomDir() {
   return direction[Math.floor(Math.random() * Math.floor(4))];
 }
 
-const setDestroyer1 = () => {
-  const ship1Squares = [];
+const setShipLocation = (length) => {
+  const shipSquares = [];
   let shipHead = `${getRandomLetter()}${getRandomNum()}`;
   const x = shipHead.slice(0, 1);
   const y = shipHead.slice(1, 2);
@@ -72,64 +84,81 @@ const setDestroyer1 = () => {
   //   console.log("X:", x, "Y:", y);
 
   if (direction === "up") {
-    if (y >= 4) {
-      for (let i = y; i > y - 4; i--) {
-        ship1Squares.push(`${x}${i}`);
+    if (y >= length) {
+      for (let i = y; i > y - length; i--) {
+        shipSquares.push(`${x}${i}`);
       }
     } else {
       // switches the direction if boat will go off grid
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < length; i++) {
         let newY = Number(y) + i;
-        ship1Squares.push(`${x}${newY}`);
+        shipSquares.push(`${x}${newY}`);
       }
     }
   } else if (direction === "down") {
-    if (y <= 6) {
-      for (let i = 0; i < 4; i++) {
+    if (y <= 10 - length) {
+      for (let i = 0; i < length; i++) {
         let newY = Number(y) + i;
-        ship1Squares.push(`${x}${newY}`);
+        shipSquares.push(`${x}${newY}`);
       }
     } else {
       // switches the direction if boat will go off grid
-      for (let i = y; i > y - 4; i--) {
-        ship1Squares.push(`${x}${i}`);
+      for (let i = y; i > y - length; i--) {
+        shipSquares.push(`${x}${i}`);
       }
     }
   } else if (direction === "right") {
-    if (letters[x] <= 6) {
+    if (letters[x] <= 10 - length) {
       let num = letters[x];
-      let upper = num + 4;
+      let upper = num + length;
       for (let i = num; i < upper; i++) {
-        ship1Squares.push(`${letters[i]}${y}`);
+        shipSquares.push(`${letters[i]}${y}`);
       }
     } else {
       // switches the direction if boat will go off grid
       let num = letters[x];
-      let lower = num - 4;
+      let lower = num - length;
       for (let i = num; i > lower; i--) {
-        ship1Squares.push(`${letters[i]}${y}`);
+        shipSquares.push(`${letters[i]}${y}`);
       }
     }
   } else if (direction === "left") {
-    if (letters[x] >= 3) {
+    if (letters[x] >= length - 1) {
       let num = letters[x];
-      let lower = num - 4;
+      let lower = num - length;
       for (let i = num; i > lower; i--) {
-        ship1Squares.push(`${letters[i]}${y}`);
+        shipSquares.push(`${letters[i]}${y}`);
       }
     } else {
       // switches the direction if boat will go off grid
       let num = letters[x];
-      let upper = num + 4;
+      let upper = num + length;
       for (let i = num; i < upper; i++) {
-        ship1Squares.push(`${letters[i]}${y}`);
+        shipSquares.push(`${letters[i]}${y}`);
       }
     }
   }
-  destroyer1 = ship1Squares;
+
+  console.log("Occupied squares: ", occupiedSquares);
+  //   console.log("this ship's squares: ", shipSquares);
+
+  if (shipSquares.some((square) => occupiedSquares.includes(square))) {
+    console.log("A square is doubled");
+    return undefined;
+  } else {
+    shipSquares.forEach((location) => occupiedSquares.push(location));
+    console.log("All good");
+    return shipSquares;
+  }
 };
 
 window.onload = () => {
   console.log("page is fully loaded");
-  setDestroyer1();
+  battleship = setShipLocation(5);
+  destroyer1 = setShipLocation(4);
+  destroyer2 = setShipLocation(4);
+  console.log("battleship: ", battleship);
+  console.log("destroyer1: ", destroyer1);
+  console.log("destroyer2: ", destroyer2);
+  highlightShips(occupiedSquares);
 };
