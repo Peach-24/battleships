@@ -33,16 +33,16 @@ h3 {
   background-color: rgba(255, 255, 255, 0.295);
   width: 200px;
   margin: auto;
-  padding: 0.5rem;
+  padding: 5px;
 }
 
-#start {
-  margin: 1rem;
+button {
+  margin: 0rem;
+  padding: 0rem;
 }
 
 #feedback {
   color: yellow;
-  font-size: 15px;
 }
 
 ul {
@@ -75,9 +75,12 @@ li p {
 
 /***** RESPONSIVE BOARD SIZE *****/
 @media (min-width: 100px) {
+  #feedback {
+    font-size: 10px;
+  }
   .board {
     position: absolute;
-    top: 70%;
+    top: 68%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -131,6 +134,10 @@ li p {
 }
 
 @media (min-width: 450px) {
+  #feedback {
+    font-size: 16px;
+  }
+
   .board {
     position: absolute;
     top: 60%;
