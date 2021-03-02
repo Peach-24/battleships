@@ -34,18 +34,18 @@ let destroyer1 = [];
 let destroyer2 = [];
 let successfulHits = [];
 
-const makeSelection = () => {
-  const input = document.getElementById("coordinates").value.toUpperCase();
-  const square = document.getElementById(input);
+const makeSelection = (input) => {
+  const formInput = document.getElementById("coordinates").value.toUpperCase();
+  const square = document.getElementById(input || formInput);
 
   const battle = document.getElementById("battleship");
   const dest1 = document.getElementById("destroyer1");
   const dest2 = document.getElementById("destroyer2");
 
-  if (occupiedSquares.includes(input)) {
+  if (occupiedSquares.includes(input || formInput)) {
     square.classList.add("hit");
     let feedback = document.getElementById("feedback");
-    successfulHits.push(input);
+    successfulHits.push(input || formInput);
     feedback.innerText = "HIT!";
   } else {
     let feedback = document.getElementById("feedback");
@@ -156,16 +156,15 @@ const setShipLocation = (length) => {
   }
 };
 
-const highlightShips = () => {
-  occupiedSquares.map((square) => {
-    let x = document.getElementById(square);
-    x.classList.add("ship");
-  });
-};
+// const highlightShips = () => {
+//   occupiedSquares.map((square) => {
+//     let x = document.getElementById(square);
+//     x.classList.add("ship");
+//   });
+// };
 
 const initGame = () => {
   battleship = setShipLocation(5);
-
   destroyer1 = setShipLocation(4);
   if (destroyer1 === undefined) {
     destroyer1 = setShipLocation(4);
@@ -174,7 +173,6 @@ const initGame = () => {
   if (destroyer2 === undefined) {
     destroyer2 = setShipLocation(4);
   }
-
   if (destroyer1 === undefined || destroyer2 === undefined) {
     window.location.reload();
   }
@@ -184,5 +182,5 @@ window.onload = () => {
   console.log("Page is fully loaded.");
   initGame();
   console.log("Ship locations:", shipsNestedArr);
-  highlightShips(occupiedSquares);
+  // highlightShips(occupiedSquares);
 };
