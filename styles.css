@@ -54,6 +54,9 @@ ul {
 li p {
   font-size: 14px;
 }
+input {
+  width: 50px;
+}
 
 /***** Conditional elements *****/
 .ship-sunk {
@@ -71,6 +74,10 @@ li p {
   display: none;
   max-width: 80%;
   margin: 5px auto;
+}
+
+#err-input {
+  display: none;
 }
 
 /***** RESPONSIVE BOARD SIZE *****/

@@ -34,10 +34,33 @@ let destroyer1 = [];
 let destroyer2 = [];
 let successfulHits = [];
 
+// Useful random functions - used to generate ship locations
+function getRandomNum() {
+  return Math.floor(Math.random() * Math.floor(10));
+}
+function getRandomLetter() {
+  return letters[Math.floor(Math.random() * Math.floor(10))];
+}
+function getRandomDir() {
+  return direction[Math.floor(Math.random() * Math.floor(4))];
+}
+
 const makeSelection = (input) => {
   const formInput = document.getElementById("coordinates").value.toUpperCase();
-  const square = document.getElementById(input || formInput);
+  const letterReg = /[A-Z]/g;
+  const numReg = /[0-9]/g;
+  const inputErr = document.getElementById("err-input");
 
+  if (
+    letterReg.test(formInput[0]) === false ||
+    numReg.test(formInput[1]) === false
+  ) {
+    inputErr.style.display = "block";
+  } else {
+    inputErr.style.display = "none";
+  }
+
+  const square = document.getElementById(input || formInput);
   const battle = document.getElementById("battleship");
   const dest1 = document.getElementById("destroyer1");
   const dest2 = document.getElementById("destroyer2");
@@ -72,18 +95,6 @@ const makeSelection = (input) => {
   }
 };
 
-function getRandomNum() {
-  return Math.floor(Math.random() * Math.floor(10));
-}
-
-function getRandomLetter() {
-  return letters[Math.floor(Math.random() * Math.floor(10))];
-}
-
-function getRandomDir() {
-  return direction[Math.floor(Math.random() * Math.floor(4))];
-}
-
 const setShipLocation = (length) => {
   const shipSquares = [];
   let shipHead = `${getRandomLetter()}${getRandomNum()}`;
@@ -91,13 +102,13 @@ const setShipLocation = (length) => {
   const y = shipHead.slice(1, 2);
   let direction = getRandomDir();
 
+  // Positions ships, changes the direction if boat will go off grid
   if (direction === "up") {
     if (y >= length) {
       for (let i = y; i > y - length; i--) {
         shipSquares.push(`${x}${i}`);
       }
     } else {
-      // switches the direction if boat will go off grid
       for (let i = 0; i < length; i++) {
         let newY = Number(y) + i;
         shipSquares.push(`${x}${newY}`);
@@ -110,36 +121,31 @@ const setShipLocation = (length) => {
         shipSquares.push(`${x}${newY}`);
       }
     } else {
-      // switches the direction if boat will go off grid
       for (let i = y; i > y - length; i--) {
         shipSquares.push(`${x}${i}`);
       }
     }
   } else if (direction === "right") {
-    if (letters[x] <= 10 - length) {
-      let num = letters[x];
+    let num = letters[x];
+    if (num <= 10 - length) {
       let upper = num + length;
       for (let i = num; i < upper; i++) {
         shipSquares.push(`${letters[i]}${y}`);
       }
     } else {
-      // switches the direction if boat will go off grid
-      let num = letters[x];
       let lower = num - length;
       for (let i = num; i > lower; i--) {
         shipSquares.push(`${letters[i]}${y}`);
       }
     }
   } else if (direction === "left") {
-    if (letters[x] >= length - 1) {
-      let num = letters[x];
+    let num = letters[x];
+    if (num >= length - 1) {
       let lower = num - length;
       for (let i = num; i > lower; i--) {
         shipSquares.push(`${letters[i]}${y}`);
       }
     } else {
-      // switches the direction if boat will go off grid
-      let num = letters[x];
       let upper = num + length;
       for (let i = num; i < upper; i++) {
         shipSquares.push(`${letters[i]}${y}`);
@@ -147,6 +153,7 @@ const setShipLocation = (length) => {
     }
   }
 
+  // checks to see if ship overlaps/shares squares with existing ship
   if (shipSquares.some((square) => occupiedSquares.includes(square))) {
     return undefined;
   } else {
