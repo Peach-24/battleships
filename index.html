@@ -137,14 +137,20 @@
         <h3>Enemy ships:</h3>
         <ul>
           <li><p id="battleship">Battleship (5 squares)</p></li>
-          <li><p id="destroyer-1">Destroyer (4 squares)</p></li>
-          <li><p id="destoryer-2">Destroyer (4 squares)</p></li>
+          <li><p id="destroyer1">Destroyer (4 squares)</p></li>
+          <li><p id="destroyer2">Destroyer (4 squares)</p></li>
         </ul>
       </div>
       <div id="missile-input">
         <input placeholder="A0" id="coordinates" />
         <button onclick="makeSelection()">Fire!</button>
         <p id="feedback"></p>
+      </div>
+      <div>
+        <p id="success-message">
+          All of the enemies ships have been sunk! Great work.
+        </p>
+        <button onclick="initGame()">Reset game</button>
       </div>
     </main>
     <script src="app.js" charset="utf-8"></script>

@@ -19,14 +19,18 @@ h3 {
   size: 18px;
 }
 
+.ship-sunk {
+  text-decoration-line: line-through;
+}
+
 .board {
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 480px;
-  height: 480px;
+  width: 360px;
+  height: 360px;
   display: flex;
   flex-wrap: wrap;
   background-color: navy;
@@ -36,8 +40,8 @@ h3 {
 }
 
 .grid div {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: 1px solid rgba(255, 255, 255, 0.582);
 }
 
@@ -49,7 +53,11 @@ h3 {
 }
 
 .ship {
-  background-color: rgba(173, 216, 230, 0.397);
+  /* background-color: rgba(173, 216, 230, 0.288); */
+}
+
+#success-message {
+  display: none;
 }
 
 #row-col {

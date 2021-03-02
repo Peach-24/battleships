@@ -39,23 +39,36 @@ const makeSelection = () => {
   const square = document.getElementById(input);
 
   const battle = document.getElementById("battleship");
-  const dest1 = document.getElementById("destroyer-1");
-  const dest2 = document.getElementById("destroyer-2");
+  const dest1 = document.getElementById("destroyer1");
+  const dest2 = document.getElementById("destroyer2");
 
   if (occupiedSquares.includes(input)) {
-    // square.classList.add("hit");
+    square.classList.add("hit");
     let feedback = document.getElementById("feedback");
     successfulHits.push(input);
-
-    // check if a full boat has been sunk,
-    // if it has NOT, set feedback text to HIT
     feedback.innerText = "HIT!";
-    // if it HAS, set feedback text to SUNK
-    // also add "sunk" class (strikethrough) to appropriate ship
   } else {
     let feedback = document.getElementById("feedback");
     square.classList.add("selected");
     feedback.innerText = "MISS!";
+  }
+
+  if (battleship.every((el) => successfulHits.indexOf(el) > -1)) {
+    battle.classList.add("ship-sunk");
+    feedback.innerText = "SINK!";
+  }
+  if (destroyer1.every((el) => successfulHits.indexOf(el) > -1)) {
+    dest1.classList.add("ship-sunk");
+    feedback.innerText = "SINK!";
+  }
+  if (destroyer2.every((el) => successfulHits.indexOf(el) > -1)) {
+    dest2.classList.add("ship-sunk");
+    feedback.innerText = "SINK!";
+  }
+
+  if (successfulHits.length === 13) {
+    const message = document.getElementById("success-message");
+    message.style.display = "block";
   }
 };
 
