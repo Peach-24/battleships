@@ -156,13 +156,6 @@ const setShipLocation = (length) => {
   }
 };
 
-// const highlightShips = () => {
-//   occupiedSquares.map((square) => {
-//     let x = document.getElementById(square);
-//     x.classList.add("ship");
-//   });
-// };
-
 const initGame = () => {
   battleship = setShipLocation(5);
   destroyer1 = setShipLocation(4);
@@ -182,5 +175,4 @@ window.onload = () => {
   console.log("Page is fully loaded.");
   initGame();
   console.log("Ship locations:", shipsNestedArr);
-  // highlightShips(occupiedSquares);
 };
