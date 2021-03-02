@@ -51,13 +51,15 @@ const makeSelection = (input) => {
   const numReg = /[0-9]/g;
   const inputErr = document.getElementById("err-input");
 
-  if (
-    letterReg.test(formInput[0]) === false ||
-    numReg.test(formInput[1]) === false
-  ) {
-    inputErr.style.display = "block";
-  } else {
-    inputErr.style.display = "none";
+  if (formInput !== "") {
+    if (
+      letterReg.test(formInput[0]) === false ||
+      numReg.test(formInput[1]) === false
+    ) {
+      inputErr.style.display = "block";
+    } else {
+      inputErr.style.display = "none";
+    }
   }
 
   const square = document.getElementById(input || formInput);

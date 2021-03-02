@@ -38,7 +38,7 @@ h3 {
 
 button {
   margin: 0rem;
-  padding: 0rem;
+  padding: 5px;
 }
 
 #feedback {
@@ -51,9 +51,6 @@ ul {
   line-height: 5px;
 }
 
-li p {
-  font-size: 14px;
-}
 input {
   width: 50px;
 }
@@ -108,6 +105,9 @@ input {
   }
   #row-col p {
     margin: 4px;
+    font-size: 14px;
+  }
+  li p {
     font-size: 14px;
   }
 }
@@ -165,5 +165,9 @@ input {
     width: 40px;
     height: 40px;
     border: 1px solid rgba(255, 255, 255, 0.582);
+  }
+
+  li p {
+    font-size: 20px;
   }
 }
